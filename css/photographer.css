@@ -5,7 +5,37 @@
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
-    margin: 0 100px;
+    margin-bottom: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px
+}
+
+.photograph-header h1 {
+    font-size: 64px;
+    font-weight: 400;
+    color: rgba(211, 87, 60, 1);
+    margin :0
+}
+
+.photograph-header .location {
+    font-size: 24px;
+    color :rgba(144, 28, 28, 1)
+}
+
+.photograph-header p {
+    margin : 0;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+
+.photograph-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+
 }
 
 .contact_button {
@@ -19,6 +49,66 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.fixed{
+    position: fixed;
+    bottom: 0;
+    right: 30px;
+    height: 60px;
+    background-color: rgba(219, 136, 118, 1);
+    display: flex;
+    align-items: center;
+    gap : 40px;
+    padding: 0 20px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+#main {
+    margin: 0 100px;
+}
+
+#main section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-content: space-between;
+}
+
+#main section article {
+    width: 350px;
+    margin-bottom: 25px;
+}
+
+#main section article img {
+    border-radius: 5px;
+    height: 300px;
+    width: 350px;
+    object-fit: cover;
+}
+
+#main section article video {
+    border-radius: 5px;
+    height: 300px;
+    width: 350px;
+    object-fit: cover;
+}
+
+#main section article .card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    color: rgba(144, 28, 28, 1)
+}
+
+#main section article .card-content h2 {
+    font-size: 24px;
+    margin: 5px 0;
+    font-weight: 400;
 }
 
 .modal {
