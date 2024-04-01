@@ -1,6 +1,5 @@
 function photoTemplate(data, photographerName) {
-/*     console.log(data)
- */    const { date, id, likes, image, photographerId, price, title, video } = data;
+    const { date, id, likes, image, photographerId, price, title, video } = data;
 
     const photographerFirstName = photographerName.split(' ')[0]
     const picture = `assets/photographerImages/${photographerFirstName}/${video ? video : image}`;
@@ -9,22 +8,31 @@ function photoTemplate(data, photographerName) {
         const article = document.createElement('article');
         const img = document.createElement(video ? 'video' : 'img')
         img.setAttribute("src", picture)
+        img.setAttribute('alt', title)
+        img.setAttribute('tabindex', '0')
+        img.setAttribute('aria-label', "Lilac breasted roller, closeup view")
+        img.setAttribute('onclick', `displayLightBox('${picture}', '${title}')`)
+        img.setAttribute('onkeydown', `if(event.keyCode===13)displayLightBox('${picture}', '${title}')`)
 
         const div = document.createElement('div')
         div.setAttribute('class', 'card-content')
 
         const h2 = document.createElement('h2')
+        h2.setAttribute('tabindex', '0')
         h2.textContent = title
 
         const like = document.createElement('div')
         const likeNumber = document.createElement('span')
         likeNumber.setAttribute('class', 'likes')
         likeNumber.textContent = likes
-        /*         const heartIcon = document.createElement('img')
-                heartIcon.setAttribute('src', 'assets/icons/close.svg') */
+        const heartIcon = document.createElement('i')
+        heartIcon.setAttribute('tabindex', '0')
+        heartIcon.setAttribute('onclick', 'incrementLike(this)')
+        heartIcon.setAttribute('onkeydown', 'if(event.keyCode === 13) incrementLike(this)')
+        heartIcon.setAttribute('aria-label', 'likes')
+        heartIcon.setAttribute('class', 'fa-solid fa-heart')
         like.appendChild(likeNumber)
-        /*         like.appendChild(heartIcon)
-         */
+        like.appendChild(heartIcon)
 
         div.appendChild(h2)
         div.appendChild(like)
@@ -39,43 +47,62 @@ function photoTemplate(data, photographerName) {
 
 function photographerInformationTemplate(photographerData, totalLikes) {
     const section = document.querySelector('.photograph-header')
-    console.log(section)
     const picture = `assets/photographers/${photographerData.portrait}`;
+
+    const modalTitle = document.getElementsByClassName('modal')[0].children[0].children[0]
+    modalTitle.innerHTML = modalTitle.innerHTML + ' ' + photographerData.name
+    document.getElementsByClassName('modal')[0].setAttribute('aria-label' , `Contact me ${photographerData.name}`)
 
     const div = document.createElement('div')
     const h1 = document.createElement('h1')
+    h1.setAttribute('tabindex', '0')
     h1.textContent = photographerData.name
     div.appendChild(h1)
+
+    const divLocation = document.createElement('div')
+    divLocation.setAttribute('tabindex', '0')
 
     const location = document.createElement('p')
     location.setAttribute('class', 'location')
     location.textContent = photographerData.city + ', ' + photographerData.country
-    div.appendChild(location)
+    divLocation.appendChild(location)
 
     const tagLine = document.createElement('p')
     tagLine.textContent = photographerData.tagline
-    div.appendChild(tagLine)
+    divLocation.appendChild(tagLine)
+
+    div.append(divLocation)
 
     section.prepend(div)
 
+    const divImg = document.createElement('div')
     const img = document.createElement('img')
     img.setAttribute('src', picture)
+    img.setAttribute('alt', photographerData.name)
+    img.setAttribute('tabindex', '0')
     img.setAttribute('class', 'photograph-image')
-
-    section.appendChild(img)
+    divImg.appendChild(img)
+    section.appendChild(divImg)
 
     const main = document.querySelector('#main')
     const fixed = document.createElement('div')
+    fixed.setAttribute('tabindex', '0')
     fixed.setAttribute('class', 'fixed')
+    const totalLikesDiv = document.createElement('div')
     const totalLikesSpan = document.createElement('span')
-    totalLikesSpan.textContent = totalLikes
-    fixed.appendChild(totalLikesSpan)
+    totalLikesSpan.innerHTML = totalLikes
+    const HeartSpan = document.createElement('i')
+    HeartSpan.setAttribute('class', 'fa-solid fa-heart')
+
+    totalLikesDiv.append(totalLikesSpan)
+    totalLikesDiv.append(HeartSpan)
+    fixed.append(totalLikesDiv)
 
     const price = document.createElement('span')
     price.textContent = photographerData.price + '€ / jour'
     fixed.appendChild(price)
 
-    main.appendChild(fixed)
+    main.children[0].insertAdjacentElement('afterend', fixed)
 
 
 }

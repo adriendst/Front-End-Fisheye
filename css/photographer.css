@@ -1,5 +1,11 @@
-#contact_modal {
+#contact_modal,
+#lightBox_modal {
     display: none;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(196, 196, 196, 0.4);
 }
 
 .photograph-header {
@@ -12,20 +18,34 @@
     padding: 0 50px
 }
 
+.photograph-header div {
+    width: 33.3%
+}
+
+.photograph-header div div{
+    width: 100%
+}
+
+.photograph-header >div:not(:first-child) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .photograph-header h1 {
     font-size: 64px;
     font-weight: 400;
     color: rgba(211, 87, 60, 1);
-    margin :0
+    margin: 0
 }
 
 .photograph-header .location {
     font-size: 24px;
-    color :rgba(144, 28, 28, 1)
+    color: rgba(144, 28, 28, 1)
 }
 
 .photograph-header p {
-    margin : 0;
+    margin: 0;
     font-size: 18px;
     margin-top: 10px;
 }
@@ -35,7 +55,7 @@
     width: 200px;
     height: 200px;
     border-radius: 100%;
-
+    object-fit: cover;
 }
 
 .contact_button {
@@ -51,7 +71,11 @@
     cursor: pointer;
 }
 
-.fixed{
+.contact_button:hover, .contact_button:focus{
+    background-color: #D3573C;
+}
+
+.fixed {
     position: fixed;
     bottom: 0;
     right: 30px;
@@ -59,7 +83,7 @@
     background-color: rgba(219, 136, 118, 1);
     display: flex;
     align-items: center;
-    gap : 40px;
+    gap: 40px;
     padding: 0 20px;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
@@ -69,6 +93,10 @@
 
 #main {
     margin: 0 100px;
+}
+
+#main >button{
+    opacity: 0;
 }
 
 #main section {
@@ -105,10 +133,81 @@
     color: rgba(144, 28, 28, 1)
 }
 
+#main section article .card-content div {
+    display: flex;
+    justify-content: center;
+}
+
+#main section article .card-content i {
+    margin: 0;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+#main section article .card-content i::before {
+
+}
+
 #main section article .card-content h2 {
     font-size: 24px;
     margin: 5px 0;
     font-weight: 400;
+}
+
+.lightBox {
+    border-radius: 5px;
+    background-color: white;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 35px;
+    margin: auto;
+    overflow: auto;
+    position: relative;
+}
+
+.lightBox .imageContainer {
+    height: 90%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lightBox .imageContainer i {
+    font-size: 96px;
+    color: rgba(144, 28, 28, 1)
+}
+
+.lightBox .imageContainer img {
+    max-height: 100%;
+    max-width: 80%;
+    object-fit: contain;
+}
+
+.lightBox .imageContainer video {
+    max-height: 100%;
+    max-width: 80%;
+    object-fit: contain;
+}
+
+.lightBox p {
+    margin: 0;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    font-size: 24px;
+    color: rgba(144, 28, 28, 1)
+}
+
+.lightBox >i{
+    position: absolute;
+    right: 50px;
+    font-size: 96px;
+    color: rgba(144, 28, 28, 1)
 }
 
 .modal {
@@ -121,6 +220,12 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    overflow: auto;
+    max-height: calc(100% - 70px);
+}
+
+.modal::-webkit-scrollbar {
+    display: none;
 }
 
 .modal header {
@@ -163,4 +268,72 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+    font-size: 40px;
+}
+
+
+textarea {
+    width: 100%;
+    height: 150px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+    font-size: 40px;
+}
+
+.sortBy {
+    display: flex;
+    min-height: 75px;
+    position: relative
+}
+
+.sortBy .customSelect {
+    display: flex;
+    width: 170px;
+    background-color: rgba(144, 28, 28, 1);
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    flex-direction: column;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 5;
+    left : 75px
+}
+
+.sortBy .customSelect .options {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.sortBy .customSelect .chevron {
+    position: absolute;
+    top: 23px;
+    right: 20px
+}
+
+.customSelect:not(:has(.hidden)) .chevron {
+    transform: rotate(90deg);
+}
+
+.sortBy .customSelect .options p {
+    margin-left: 35px
+}
+
+.customSelect:not(:has(.hidden)) .options:not(:last-child)::after {
+    content: '';
+    width: 150px;
+    height: 1px;
+    background-color: white;
+    position: absolute;
+    top: 70px;
+    left: 10px
+}
+
+.hidden {
+    display: none !important;
 }

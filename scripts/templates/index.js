@@ -7,10 +7,13 @@ function photographerTemplate(data) {
         const article = document.createElement('article');
         const a = document.createElement('a')
         a.setAttribute('href', '/photographer.html?id=' + id)
+        a.setAttribute('aria-label' , name)
         const img = document.createElement('img');
         img.setAttribute("src", picture)
         const h2 = document.createElement('h2');
         h2.textContent = name;
+        const div = document.createElement('div')
+        div.setAttribute('tabindex' , '0')
         const location = document.createElement('p');
         location.setAttribute('class', 'location')
         location.textContent = city + ', ' + country;
@@ -23,9 +26,10 @@ function photographerTemplate(data) {
         a.appendChild(img)
         a.appendChild(h2);
         article.appendChild(a)
-        article.appendChild(location)
-        article.appendChild(tagLine)
-        article.appendChild(priceSection)
+        div.appendChild(location)
+        div.appendChild(tagLine)
+        div.appendChild(priceSection)
+        article.appendChild(div)
         return (article);
     }
     return { getUserCardDOM }

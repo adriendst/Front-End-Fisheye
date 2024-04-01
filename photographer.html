@@ -1,38 +1,83 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
-    <header>
-      <img src="assets/images/logo.png" class="logo" />
-    </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Fisheye - photographe </title>
+</head>
+
+<body>
+  <header>
+    <a href="/" aria-label="Fisheye Home page">
+      <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" />
+    </a>
+  </header>
+  <main id="main">
+    <div class="photograph-header">
+      <div><button class="contact_button" aria-label="Contact Me" onclick="displayModal()">Contactez-moi</button></div>
+    </div>
+    <div class="sortBy">
+      <p tabindex="0">Trier par</p>
+      <div class="customSelect" id="customSelect" role="button" onkeydown="if(event.keyCode === 13) displaySelect()"
+        onclick="displaySelect()" tabindex="0" aria-label="Order by">
+        <div class="options">
+          <p>Date</p>
+        </div>
+        <div class="hidden options">
+          <p>Popularité</p>
+        </div>
+        <div class="hidden options">
+          <p>Titre</p>
+        </div>
+        <div class="chevron"><i class="fa-solid fa-chevron-right" onclick="nextImage()"></i></div>
       </div>
-    </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="/scripts/templates/photographer.js"></script>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
-  </body>
+    </div>
+  </main>
+  <div id="contact_modal">
+    <div class="modal" tabindex="-1">
+      <header>
+        <h2 tabindex="0">Contactez-moi</h2>
+        <img src="assets/icons/close.svg" tabindex="-1" onclick="closeModal()" onkeydown="if(event.keyCode === 13) closeModal()" alt="close contact form"/>
+      </header>
+      <form onsubmit="sendData(event)" method="post">
+        <div>
+          <label for="firstname" tabindex="0">Prénom</label>
+          <input id="firstname" name="firstname" />
+          <label for="lastname" tabindex="0">Nom</label>
+          <input id="lastname" name="lastname" />
+          <label for="email" tabindex="0">Email</label>
+          <input type="email" id="email" name="email" />
+          <label for="message" tabindex="0">Votre Message</label>
+          <textarea name="message" id="message"></textarea>
+        </div>
+        <button class="contact_button" onkeydown="closeTab(event)" aria-label="Send" type="submit">Envoyer</button>
+      </form>
+    </div>
+  </div>
+  <div id="lightBox_modal">
+    <div class="lightBox" aria-label="image closeup view" tabindex="-1">
+      <div class="imageContainer">
+        <i class="fa-solid fa-chevron-left" onclick="previousImage()" onkeydown="if(event.keyCode === 9){nextTab(event)}else if(event.keyCode === 13){previousImage()}" tabindex="-1" aria-label="Previous image"></i>
+        <img tabindex="0">
+        <i class="fa-solid fa-chevron-right" onclick="nextImage()" onkeydown="if(event.keyCode === 9){nextTab(event)}else if(event.keyCode === 13){nextImage()}" tabindex="-1" aria-label="Next image"></i>
+      </div>
+      <p tabindex="0" onkeydown="nextTab(event)"></p>
+      <i class="fa-solid fa-xmark" type='button' onclick="closeLightBox()" onkeydown="if(event.keyCode === 13) closeLightBox()" tabindex="0" aria-label="Close dialog"></i>
+    </div>
+  </div>
+  </div>
+  <script src="/scripts/templates/photographer.js"></script>
+  <script src="/scripts/pages/photographer.js"></script>
+  <script src="/scripts/utils/contactForm.js"></script>
+  <script src="/scripts/utils/customSelect.js"></script>
+  <script src="/scripts/utils/customLike.js"></script>
+  <script src="/scripts/utils/customLightBox.js"></script>
+</body>
+
 </html>
