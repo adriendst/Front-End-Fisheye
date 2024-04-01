@@ -64,13 +64,12 @@
     <div class="lightBox" aria-label="image closeup view" tabindex="-1">
       <div class="imageContainer">
         <i class="fa-solid fa-chevron-left" onclick="previousImage()" onkeydown="if(event.keyCode === 9){nextTab(event)}else if(event.keyCode === 13){previousImage()}" tabindex="-1" aria-label="Previous image"></i>
-        <img tabindex="0">
+        <img tabindex="0" src="/" alt="">
         <i class="fa-solid fa-chevron-right" onclick="nextImage()" onkeydown="if(event.keyCode === 9){nextTab(event)}else if(event.keyCode === 13){nextImage()}" tabindex="-1" aria-label="Next image"></i>
       </div>
       <p tabindex="0" onkeydown="nextTab(event)"></p>
-      <i class="fa-solid fa-xmark" type='button' onclick="closeLightBox()" onkeydown="if(event.keyCode === 13) closeLightBox()" tabindex="0" aria-label="Close dialog"></i>
+      <i class="fa-solid fa-xmark" onclick="closeLightBox()" onkeydown="if(event.keyCode === 13) closeLightBox()" tabindex="0" aria-label="Close dialog"></i>
     </div>
-  </div>
   </div>
   <script src="/scripts/templates/photographer.js"></script>
   <script src="/scripts/pages/photographer.js"></script>
