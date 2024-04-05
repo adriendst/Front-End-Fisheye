@@ -6,6 +6,7 @@
     top: 0;
     width: 100%;
     background-color: rgba(196, 196, 196, 0.4);
+    z-index: 2;
 }
 
 .photograph-header {
@@ -298,7 +299,7 @@ textarea {
     flex-direction: column;
     border-radius: 5px;
     position: absolute;
-    z-index: 5;
+    z-index: 1;
     left : 75px
 }
 

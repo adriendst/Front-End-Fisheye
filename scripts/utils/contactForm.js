@@ -1,8 +1,22 @@
-function displayModal() {
+const openModalButton = document.querySelectorAll('.contact_button')[1]
+openModalButton.addEventListener('click', () => { displayModal() })
+
+const closeModalButton = document.querySelector('#closeicon')
+closeModalButton.addEventListener('click', () => closeModal())
+closeModalButton.addEventListener('keydown', (event) => { if (event.keyCode === 13) { closeModal() } else if (event.keyCode === 9) focusFirstElementModal() })
+
+
+const sendModalButton = document.querySelectorAll('.contact_button')[0]
+sendModalButton.addEventListener('keydown', (event) => closeTab(event))
+
+const form = document.querySelector('form')
+form.addEventListener('submit', (event) => sendData(event))
+
+
+export function displayModal() {
     const contactModal = document.getElementById("contact_modal");
-	contactModal.style.display = "flex";
+    contactModal.style.display = "flex";
     const modal = document.getElementsByClassName('modal')[0]
-    console.log(modal)
     modal.focus()
 }
 
@@ -12,17 +26,22 @@ function closeModal() {
     document.getElementsByClassName('contact_button')[0].focus()
 }
 
-function closeTab(event){
-    console.log(event.keyCode)
-    if(event.keyCode === 9){
-        const closeModalButton = Array.from(document.getElementsByTagName('img')).filter(img => img.alt ==='close contact form')[0]
+export function closeTab(event) {
+    if (event.keyCode === 9) {
+        const close = document.querySelector('#closeicon');
+        console.log(close)
         setTimeout(() => {
-            closeModalButton.focus()
-        }, 1);
-   }
+            close.focus()
+        }, 0);
+    }
 }
 
-function sendData(event){
+export function focusFirstElementModal() {
+    const modal = document.querySelector('.modal')
+    modal.focus()
+}
+
+export function sendData(event) {
     event.preventDefault()
     console.log(document.getElementById('firstname').value)
     console.log(document.getElementById('lastname').value)

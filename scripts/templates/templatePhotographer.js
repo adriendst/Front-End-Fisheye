@@ -1,4 +1,8 @@
-function photoTemplate(data, photographerName) {
+import { displayLightBox } from "../utils/customLightBox.js";
+import { incrementLike } from "../utils/customLike.js";
+
+export function photoTemplate(data, photographerName) {
+    // eslint-disable-next-line no-unused-vars
     const { date, id, likes, image, photographerId, price, title, video } = data;
 
     const photographerFirstName = photographerName.split(' ')[0]
@@ -11,8 +15,8 @@ function photoTemplate(data, photographerName) {
         img.setAttribute('alt', title)
         img.setAttribute('tabindex', '0')
         img.setAttribute('aria-label', "Lilac breasted roller, closeup view")
-        img.setAttribute('onclick', `displayLightBox('${picture}', '${title}')`)
-        img.setAttribute('onkeydown', `if(event.keyCode===13)displayLightBox('${picture}', '${title}')`)
+        img.addEventListener('click', () => displayLightBox(picture, title))
+        img.addEventListener('keydown', (event) => { if (event.keyCode === 13) displayLightBox(picture, title) })
 
         const div = document.createElement('div')
         div.setAttribute('class', 'card-content')
@@ -27,8 +31,8 @@ function photoTemplate(data, photographerName) {
         likeNumber.textContent = likes
         const heartIcon = document.createElement('i')
         heartIcon.setAttribute('tabindex', '0')
-        heartIcon.setAttribute('onclick', 'incrementLike(this)')
-        heartIcon.setAttribute('onkeydown', 'if(event.keyCode === 13) incrementLike(this)')
+        heartIcon.addEventListener('click', incrementLike)
+        heartIcon.addEventListener('keydown', (event) => { if (event.keyCode === 13) incrementLike(event) })
         heartIcon.setAttribute('aria-label', 'likes')
         heartIcon.setAttribute('class', 'fa-solid fa-heart')
         like.appendChild(likeNumber)
@@ -45,13 +49,13 @@ function photoTemplate(data, photographerName) {
     return { getPhotoCardDOM }
 }
 
-function photographerInformationTemplate(photographerData, totalLikes) {
+export function photographerInformationTemplate(photographerData, totalLikes) {
     const section = document.querySelector('.photograph-header')
     const picture = `assets/photographers/${photographerData.portrait}`;
 
     const modalTitle = document.getElementsByClassName('modal')[0].children[0].children[0]
     modalTitle.innerHTML = modalTitle.innerHTML + ' ' + photographerData.name
-    document.getElementsByClassName('modal')[0].setAttribute('aria-label' , `Contact me ${photographerData.name}`)
+    document.getElementsByClassName('modal')[0].setAttribute('aria-label', `Contact me ${photographerData.name}`)
 
     const div = document.createElement('div')
     const h1 = document.createElement('h1')

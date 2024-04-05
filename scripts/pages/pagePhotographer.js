@@ -1,4 +1,6 @@
-//Mettre le code JavaScript lié à la page photographer.html
+import { photoTemplate } from "../templates/templatePhotographer.js";
+import { photographerInformationTemplate } from "../templates/templatePhotographer.js";
+
 async function getPhotograper() {
     let params = new URL(document.location).searchParams;
     let id = params.get("id");
@@ -34,7 +36,7 @@ async function displayPhotorapherInformations(photographerData, totalLikes) {
     photographerInformationTemplate(photographerData, totalLikes)
 }
 
-let photostest;
+export let photostest;
 let photographertest;
 
 async function initPhotos() {
@@ -60,7 +62,7 @@ async function init() {
 init();
 initPhotos()
 
-function sortPhoto(sortBy) {
+export function sortPhoto(sortBy) {
     if (sortBy === 'Popularité') {
         photostest.sort((a, b) => a.likes - b.likes)
         photostest.reverse()

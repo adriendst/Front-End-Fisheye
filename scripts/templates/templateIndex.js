@@ -1,4 +1,4 @@
-function photographerTemplate(data) {
+export function photographerTemplate(data) {
     const { city, country, id, name, portrait, price, tagline } = data;
 
     const picture = `assets/photographers/${portrait}`;
@@ -9,6 +9,7 @@ function photographerTemplate(data) {
         a.setAttribute('href', '/photographer.html?id=' + id)
         a.setAttribute('aria-label' , name)
         const img = document.createElement('img');
+        img.setAttribute('alt', ' ')
         img.setAttribute("src", picture)
         const h2 = document.createElement('h2');
         h2.textContent = name;
