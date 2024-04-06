@@ -60,7 +60,9 @@ export function select(event) {
         customSelect.addEventListener('keydown', keyBoardEnterDisplaySelect);
     }, '1');
 
-    const sortBy = event.srcElement.firstChild.nodeValue
+
+    const sortBy = event.currentTarget.firstChild.nextSibling.innerHTML
+    console.log(sortBy)
     sortPhoto(sortBy)
 }
 
